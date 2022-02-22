@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-info" id="btn">點 我 查 詢</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <table id="table_id" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>站點代號/sno</th>
+                    <th>區域/sarea</th>
+                    <th>場站中文名稱/sna</th>
+                    <th>場站總停車格/tot</th>
+                    <th>場站目前車輛數量/sbi</th>
+                    <th>地址/ar</th>
+                    <th>空位數量/bemp</th>
+                    <th>場站名稱英文/sname</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- 先載入 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+
+    <!-- datatable -->
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+    <!-- 先載入 END-->
+    <script src="./js/data20222022.js"></script>
+    <script>
+       
+        // $.ajax({
+        //     type: "get",
+        //     url: "curl.php",
+        //     dataType: 'json',
+        //     success: function(result) {
+             
+        //         console.log(result);
+
+        //     }
+        // })
+        $.get("curl1.php",(res)=>
+        {console.log(res)}
+        )
+        </script>
+        <script>
+        $(document).ready(function () {
+
+            // console.log('Array.isArray(dataStore)', Array.isArray(dataStore));
+
+            newDataView = [];
+            dataView.forEach((value, key) => {
+                if(value.area=='大安區'){
+                    newDataView[key] = { sno: value.sno, sarea: '大安區', sna: value.sna, tot: value.tot, sbi: value.sbi, ar: value.ar, bemp: value.bemp, sname: value.sname};
+                }else{
+                    newDataView[key] = { sno: value.sno, sarea: value.sarea, sna: value.sna, tot: value.tot, sbi: value.sbi, ar: value.ar, bemp: value.bemp, sname: value.sname};
+                }
+            });
+            console.log('newDataView', newDataView);
+            console.log('dataView', dataView);
+
+            for (const key in dataView) {
+                if (dataView[key]['area'] == '大安區') {
+                    dataView[key]['area'] = '大安區';
+                }
+            }
+
+            // dataStore.forEach(element => {
+
+            // });
+
+            // $('#table_id').DataTable();
+            // $('#table_id').DataTable();
+            
+            $('#table_id').DataTable({
+                data: newDataView,
+                columns: [
+                    { data: 'sno' },
+                    { data: 'sarea' },
+                    { data: 'sna' },
+                    { data: 'tot' },
+                    { data: 'sbi' },
+                    { data: 'ar' },
+                    { data: 'bemp' },
+                    { data: 'sname' },
+                ]
+            });
+
+            $('#btn').on('click', function () {
+                console.log('btn ok 0222');
+
+            });
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>
