@@ -46,9 +46,7 @@
 
 
     <!-- 先載入 -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
@@ -61,44 +59,35 @@
         src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
 
     <!-- 先載入 END-->
-    <script src="./js/data20222022.js"></script>
+    <!-- <script src="./js/data20222022.js"></script> -->
     <script>
        
-        // $.ajax({
-        //     type: "get",
-        //     url: "curl.php",
-        //     dataType: 'json',
-        //     success: function(result) {
+        $.ajax({
+            type: "get",
+            url: "curl1.php",
+            dataType: 'json',
+            success: function(dataView) {
              
-        //         console.log(result);
-
-        //     }
-        // })
-        $.get("curl1.php",(res)=>
-        {console.log(res)}
-        )
-        </script>
-        <script>
-        $(document).ready(function () {
-
-            // console.log('Array.isArray(dataStore)', Array.isArray(dataStore));
-
-            newDataView = [];
-            dataView.forEach((value, key) => {
+                console.log(dataView);
+                newDataView = [];
+           /*  dataView.forEach((value, key) => {
                 if(value.area=='大安區'){
                     newDataView[key] = { sno: value.sno, sarea: '大安區', sna: value.sna, tot: value.tot, sbi: value.sbi, ar: value.ar, bemp: value.bemp, sname: value.sname};
                 }else{
                     newDataView[key] = { sno: value.sno, sarea: value.sarea, sna: value.sna, tot: value.tot, sbi: value.sbi, ar: value.ar, bemp: value.bemp, sname: value.sname};
                 }
-            });
-            console.log('newDataView', newDataView);
-            console.log('dataView', dataView);
+            }); */
+            /* result.forEach((value, key) => {
+                console.log(value.sno,value.sname,value.sarea)
+            }); */
+            /* console.log('newDataView', newDataView);
+            console.log('dataView', dataView); */
 
-            for (const key in dataView) {
+            /* for (const key in dataView) {
                 if (dataView[key]['area'] == '大安區') {
                     dataView[key]['area'] = '大安區';
                 }
-            }
+            } */
 
             // dataStore.forEach(element => {
 
@@ -108,7 +97,7 @@
             // $('#table_id').DataTable();
             
             $('#table_id').DataTable({
-                data: newDataView,
+                data: dataView,
                 columns: [
                     { data: 'sno' },
                     { data: 'sarea' },
@@ -117,7 +106,7 @@
                     { data: 'sbi' },
                     { data: 'ar' },
                     { data: 'bemp' },
-                    { data: 'sname' },
+                    { data: 'snaen' },
                 ]
             });
 
@@ -126,6 +115,18 @@
 
             });
 
+            }
+        })
+        // $.get("curl1.php",(res)=>
+        // {console.log(res)}
+        // )
+        </script>
+        <script>
+        $(document).ready(function () {
+
+            // console.log('Array.isArray(dataStore)', Array.isArray(dataStore));
+
+           
         });
 
 
